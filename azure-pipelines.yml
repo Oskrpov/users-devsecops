@@ -1,0 +1,20 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - checkout: self
+
+  - task: Docker@2
+    displayName: Build and push backend
+    inputs:
+      command: buildAndPush
+      containerRegistry: dockerhub-users-devsecops
+      repository: oskrpov/users-backend
+      Dockerfile: backend/Dockerfile
+      tags: |
+        v1
