@@ -19,29 +19,20 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
-          env:
-            - name: PORT
-              value: "3000"
-            - name: APP_VERSION
-              value: "1.0.0"
-            - name: DB_HOST
-              value: postgres
-            - name: DB_PORT
-              value: "5432"
-            - name: DB_NAME
-              value: users_lab
-            - name: DB_USER
-              value: users_app
-            - name: DB_PASSWORD
-              value: bd1234
-            - name: FRONTEND_ORIGIN
-              value: http://localhost:5500
+
+          envFrom:
+            - configMapRef:
+                name: users-backend-config
+            - secretRef:
+                name: users-backend-secret
+
           readinessProbe:
             httpGet:
               path: /health
               port: 3000
             initialDelaySeconds: 5
             periodSeconds: 10
+
           livenessProbe:
             httpGet:
               path: /health
