@@ -1,0 +1,55 @@
+databaseChangeLog:
+- changeSet:
+    id: 1787176296280-1
+    author: oscarpoveda (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: users_pkey
+            defaultValueComputed: gen_random_uuid()
+            name: id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: first_name
+            type: VARCHAR(100)
+        - column:
+            constraints:
+              nullable: false
+            name: last_name
+            type: VARCHAR(100)
+        - column:
+            constraints:
+              nullable: false
+            name: email
+            type: VARCHAR(255)
+        - column:
+            name: phone
+            type: VARCHAR(30)
+        - column:
+            constraints:
+              nullable: false
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: created_at
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: updated_at
+            type: TIMESTAMP WITH TIME ZONE
+        tableName: users
+- changeSet:
+    id: 1787176296280-2
+    author: oscarpoveda (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: email
+        constraintName: users_email_key
+        tableName: users
+

@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-backend
+  namespace: users-devsecops
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: users-backend
+  template:
+    metadata:
+      labels:
+        app: users-backend
+    spec:
+      containers:
+        - name: backend
+          image: users-backend:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              value: "3000"
+            - name: APP_VERSION
+              value: "1.0.0"
+            - name: DB_HOST
+              value: postgres
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: users_lab
+            - name: DB_USER
+              value: users_app
+            - name: DB_PASSWORD
+              value: bd1234
+            - name: FRONTEND_ORIGIN
+              value: http://localhost:5500
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 15
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-backend
+  namespace: users-devsecops
+spec:
+  selector:
+    app: users-backend
+  ports:
+    - port: 3000
+      targetPort: 3000

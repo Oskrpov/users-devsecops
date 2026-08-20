@@ -1,0 +1,12 @@
+databaseChangeLog:
+    - changeSet:
+        id: 1
+        author: Oscar Poveda
+        changes:
+          - addColumn:
+              tableName: users
+              columns:
+                - column:
+                    name: status
+                    type: VARCHAR(20)
+            

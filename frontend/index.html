@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Management</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <main class="container">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">DevSecOps Lab</p>
+        <h1>User Management</h1>
+        <p class="subtitle">Simple user administration application.</p>
+      </div>
+      <span id="versionBadge" class="version-badge">v-</span>
+    </header>
+
+    <section class="card">
+      <div class="toolbar">
+        <label class="search">
+          <span class="sr-only">Search users</span>
+          <input id="searchInput" type="search" placeholder="Search by name, email or phone">
+        </label>
+        <button id="newUserButton" class="button primary">+ New user</button>
+      </div>
+
+      <div id="message" class="message hidden" role="status"></div>
+      <div id="loading" class="loading hidden">Loading users...</div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody"></tbody>
+        </table>
+      </div>
+      <p id="emptyState" class="empty hidden">No users found.</p>
+    </section>
+  </main>
+
+  <dialog id="userDialog" class="dialog">
+    <form id="userForm" method="dialog" class="dialog-card">
+      <div class="dialog-header">
+        <div>
+          <p class="eyebrow">User</p>
+          <h2 id="dialogTitle">New user</h2>
+        </div>
+        <button id="closeDialogButton" type="button" class="icon-button" aria-label="Close">×</button>
+      </div>
+
+      <input id="userId" type="hidden">
+
+      <label>
+        First name
+        <input id="firstName" name="first_name" required maxlength="100">
+      </label>
+
+      <label>
+        Last name
+        <input id="lastName" name="last_name" required maxlength="100">
+      </label>
+
+      <label>
+        Email
+        <input id="email" name="email" type="email" required maxlength="255">
+      </label>
+
+      <label>
+        Phone
+        <input id="phone" name="phone" maxlength="30">
+      </label>
+
+      <div id="formError" class="form-error hidden"></div>
+
+      <div class="dialog-actions">
+        <button id="cancelButton" type="button" class="button secondary">Cancel</button>
+        <button id="saveButton" type="submit" class="button primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="./js/app.js"></script>
+</body>
+</html>
