@@ -15,6 +15,6 @@ steps:
       command: buildAndPush
       containerRegistry: dockerhub-users-devsecops
       repository: oskrpov/users-backend
-      Dockerfile: backend/Dockerfile
+      Dockerfile: backend/dockerfile
       tags: |
         v1
