@@ -8,6 +8,7 @@ pool:
 
 steps:
   - checkout: self
+    persistCredentials: true
 
   # Backend - instalar dependencias
   - script: |
