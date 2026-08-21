@@ -7,6 +7,7 @@ trigger:
       - k8s/backend.yml
       - k8s/frontend.yml
 
+# agente donde se ejecutará el pipeline 
 pool:
   vmImage: ubuntu-latest
 
