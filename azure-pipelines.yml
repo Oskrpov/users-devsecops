@@ -76,3 +76,5 @@ steps:
       git commit -m "Actualizando tag de imágenes a $(Build.BuildId)"
       git push origin HEAD:main
     displayName: Commit and push updated manifests
+
+    #prueba de cambio automatico de nombre de imagen en manifiestos de kubernetes
