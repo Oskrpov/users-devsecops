@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: oskrpov/users-frontend:56
+          image: oskrpov/users-frontend:57
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
