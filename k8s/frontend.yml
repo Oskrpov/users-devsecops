@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: users-devops-lab-frontend:TAG
+          image: users-devops-lab-frontend:51
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
