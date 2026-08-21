@@ -48,3 +48,13 @@ steps:
       Dockerfile: frontend/dockerfile
       tags: |
         $(Build.BuildId)
+  - script: |
+      sed -i "s/:TAG/:$(Build.BuildId)/g" k8s/backend.yaml
+      sed -i "s/:TAG/:$(Build.BuildId)/g" k8s/frontend.yaml
+
+      echo "Backend:"
+      grep "image:" k8s/backend.yaml
+
+      echo "Frontend:"
+      grep "image:" k8s/frontend.yaml
+    displayName: Update Kubernetes image tags
