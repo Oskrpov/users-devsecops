@@ -15,7 +15,11 @@ spec:
     spec:
       containers:
         - name: backend
+<<<<<<< HEAD
           image: users-backend:51
+=======
+          image: oskrpov/users-backend:TAG
+>>>>>>> 4b79b34 (actualizado nombre de imágenes)
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
