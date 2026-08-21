@@ -36,7 +36,7 @@ steps:
       repository: oskrpov/users-backend
       Dockerfile: backend/dockerfile
       tags: |
-        v1
+        ${Build.BuildId}
 
   # Frontend - build y push
   - task: Docker@2
@@ -47,4 +47,4 @@ steps:
       repository: oskrpov/users-frontend
       Dockerfile: frontend/dockerfile
       tags: |
-        v1
+        ${Build.BuildId}
