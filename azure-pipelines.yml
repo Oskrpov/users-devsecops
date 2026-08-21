@@ -57,8 +57,8 @@ steps:
 
    # Actualizar tags de imagen en los manifiestos de Kubernetes     
   - script: |
-      sed -i "s/:TAG/:$(Build.BuildId)/g" k8s/backend.yml
-      sed -i "s/:TAG/:$(Build.BuildId)/g" k8s/frontend.yml
+      sed -i -E "s|(image: oskrpov/users-backend:).*|\1$(Build.BuildId)|" k8s/backend.yml
+      sed -i -E "s|(image: oskrpov/users-frontend:).*|\1$(Build.BuildId)|" k8s/frontend.yml
 
       echo "Backend:"
       grep "image:" k8s/backend.yml
