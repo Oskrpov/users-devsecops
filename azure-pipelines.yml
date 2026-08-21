@@ -49,12 +49,12 @@ steps:
       tags: |
         $(Build.BuildId)
   - script: |
-      sed -i "s/:TAG/:$(Build.BuildId)/g" k8s/backend.yaml
-      sed -i "s/:TAG/:$(Build.BuildId)/g" k8s/frontend.yaml
+      sed -i "s/:TAG/:$(Build.BuildId)/g" k8s/backend.yml
+      sed -i "s/:TAG/:$(Build.BuildId)/g" k8s/frontend.yml
 
       echo "Backend:"
-      grep "image:" k8s/backend.yaml
+      grep "image:" k8s/backend.yml
 
       echo "Frontend:"
-      grep "image:" k8s/frontend.yaml
+      grep "image:" k8s/frontend.yml
     displayName: Update Kubernetes image tags
