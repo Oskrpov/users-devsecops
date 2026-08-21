@@ -9,6 +9,25 @@ pool:
 steps:
   - checkout: self
 
+  # Backend - instalar dependencias
+  - script: |
+      cd backend
+      npm ci
+    displayName: Install backend dependencies
+
+  # Backend - tests
+  - script: |
+      cd backend
+      npm test
+    displayName: Run backend tests
+
+  # Backend - lint
+  - script: |
+      cd backend
+      npm run lint
+    displayName: Run backend lint
+
+  # Backend - build y push
   - task: Docker@2
     displayName: Build and push backend
     inputs:
@@ -18,6 +37,8 @@ steps:
       Dockerfile: backend/dockerfile
       tags: |
         v1
+
+  # Frontend - build y push
   - task: Docker@2
     displayName: Build and push frontend
     inputs:
