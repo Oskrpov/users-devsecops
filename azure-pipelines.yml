@@ -3,7 +3,7 @@ trigger:
     include:
       - main
   paths:
-    include:
+    exclude:
       - k8s/backend.yml
       - k8s/frontend.yml
 
