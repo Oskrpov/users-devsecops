@@ -2,6 +2,10 @@ trigger:
   branches:
     include:
       - main
+  paths:
+    include:
+      - k8s/backend.yml
+      - k8s/frontend.yml
 
 pool:
   vmImage: ubuntu-latest
@@ -49,6 +53,8 @@ steps:
       Dockerfile: frontend/dockerfile
       tags: |
         $(Build.BuildId)
+
+   # Actualizar tags de imagen en los manifiestos de Kubernetes     
   - script: |
       sed -i "s/:TAG/:$(Build.BuildId)/g" k8s/backend.yml
       sed -i "s/:TAG/:$(Build.BuildId)/g" k8s/frontend.yml
@@ -59,3 +65,13 @@ steps:
       echo "Frontend:"
       grep "image:" k8s/frontend.yml
     displayName: Update Kubernetes image tags
+
+  # commit y push de los manifiestos actualizados
+  - script: |
+      git config user.email "azure-pipeline@users-devsecops"
+      git config user.name "Azure Pipeline"
+
+      git add k8s/backend.yml k8s/frontend.yml
+      git commit -m "Actualizando tag de imágenes a $(Build.BuildId)"
+      git push origin HEAD:main
+    displayName: Commit and push updated manifests
