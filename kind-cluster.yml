@@ -1,15 +1,35 @@
+# Versión de la configuración de Kind
 apiVersion: kind.x-k8s.io/v1alpha4
+
+# Tipo de recurso
 kind: Cluster
 
+# Nombre de nuestro cluster
 name: users-devsecops
 
+# Nodos que tendrá el cluster
 nodes:
+
+  # Nodo principal donde corre el control plane de Kubernetes
   - role: control-plane
+
+    # Mapeamos puertos del nodo Kind hacia nuestra máquina Windows
     extraPortMappings:
+
+      # Backend:
+      # localhost:3000 → puerto 30000 del nodo Kind
+      - containerPort: 30000
+        hostPort: 3000
+        protocol: TCP
+
+      # Frontend:
+      # localhost:5500 → puerto 30080 del nodo Kind
       - containerPort: 30080
         hostPort: 5500
         protocol: TCP
 
+  # Primer nodo worker
   - role: worker
 
+  # Segundo nodo worker
   - role: worker
